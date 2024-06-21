@@ -1,0 +1,59 @@
+header{
+    background: #40ad15;
+    border: 8px solid #555758;
+    padding: 20 px;
+    text-align: center;
+}
+
+nav{
+    background-color: #7a7a7a;
+    padding: 5px 15px;
+}
+
+nav li{
+    display: inline-block;
+    list-style: none;
+    padding: 1px;
+    font: bold 14px verdana, sans-serif;
+    text-align: center;
+    
+}
+
+body{
+    text-align: center;
+    background: #8f6939;
+}
+
+section{
+    float: left;
+    width: 70%;
+    margin: 20px;
+    text-align: justify;
+}
+aside{
+    float: right;
+    width: 23%;
+    margin: 20px 0px;
+    padding: 20px;
+    background: #40ad15;
+    border: 1px solid #999999;
+    text-align: left;
+}
+
+article{
+    background: #40ad15;
+    padding: 20px;
+    margin-bottom: 15px;
+}
+
+footer{
+    clear: both;
+    text-align: center;
+    padding: 20px;
+    border-top: 2px solid #999999;
+}
+
+article img{
+    float: right;
+    margin: 0px 10px
+}

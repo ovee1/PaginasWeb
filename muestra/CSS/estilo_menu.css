@@ -1,0 +1,36 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+header{
+    font-family: sans-serif;
+    width: 95%;
+    margin: auto;
+}
+ul{
+    list-style: none;
+}
+#menu li>a{
+    background-color: grey;
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    display: block;
+    text-decoration: none;
+    min-width: 10px;
+}
+#menu li>a:hover{
+    color: black;
+    background-color: #aeaeae;
+}
+#menu>li{
+    float: left;
+    text-align: center;
+}
+#menu>li>ul{
+    display: none;
+}
+#menu>li:hover>ul{
+    display: block;
+}
