@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lenguaje javaScript</title>
+    <link rel="icon" href="img/javascript.png">
+    <link rel="stylesheet" href="css/estilobasico.css">
+
+</head>
+<body>
+    <h1>JavaScrip</h1>
+    <p>
+        <img src="img/javascript.jpg" alt="Imagen de referencia a Javascript"  align="right" width="350" height="200">
+        <!--El alig es para alinear la imagen -->
+        JavaScript es un <strong >lenguaje de programacion</strong> o de secuencias de comandos que te permite implementar funciones complejas en
+        páginas web, cada vez que una página web hace algo más que sentarse allí y mostrar información estática para que la
+        veas, muestra oportunas actualizaciones de contenido, mapas interactivos, animación de Gráficos 2D/3D, desplazamiento de
+        máquinas reproductoras de vídeo, etc., puedes apostar que probablemente JavaScript está involucrado. Es la tercera capa
+        del pastel de las tecnologías web estándar, dos de las cuales (HTML y CSS) hemos cubierto con mucho más detalle en otras
+        partes del Área de aprendizaje.
+        <!--el strong es para que se vea en mas negritas -->
+    </p>
+    <hr>
+    <br>
+    <h1>Variables en JavaScript</h1>
+    <p>
+        Una variable refiere, en una primer instancia, a cosas que son susceptibles de ser modificadas (de variar), de cambiar
+        en función de algún motivo determinado o indeterminado
+        
+    </p>
+Para declarar variables se utiliza:
+    <table border="2">
+        <tr> <th>Palabras reservadas </th> <th>Descripción </th> </tr>
+        <tr> <td> let</th> <th>variable local o de bloque</td> </tr>
+        <tr> <td> var</th> <th>valores globales  generales</td> </tr>
+        <tr> <td> const</th> <th>valores constantes </td> </tr>
+    </table>
+    <hr>
+    Ejemplo de variables de JavaScript:
+    <pre class="recuadro">
+        <code>
+            let nombre='Juan';
+            document.write(nombre);
+            let nombre=10;
+            document.write(edad);
+        </code>
+    </pre>
+    Para poder incluir un script en html se utiliza:
+    <pre class="recuadro">
+        <code>
+            &lt;script src="codigo.js"&gt;
+            document.write('Hola');
+            &lt;/script&gt;
+        </code>
+    </pre>
+
+    <h1>Ejemplos:</h1>
+   
+    <ol>
+        <li><a href="saludo.html">Saludo simple saludo.js</a></li>
+        <li><a href="ingreso.html">Ingresando datos </a></li>
+        <li><a href="calculadora.html">Calculadora de subred </a></li>
+        <li><a href="maps.html">Mapa GoogleMaps </a></li>
+        <li><a href="arreglos.html">Arreglo y Bootstrap </a></li>
+        <li><a href="formulario1.html">Ejemplo 1 de formulario con Bootstrap </a></li>
+        <li><a href="formulario2.html">Ejemplo 2 de formulario con Bootstrap, validadi </a></li>
+    </ol>
+
+    <pre class="recuadro">
+        <code id="htmlCode">
+            &lt;!DOCTYPE html&gt;
+            &lt;html lang="en"&gt;
+            &lt;head&gt;
+                &lt;meta charset="UTF-8"&gt;
+                &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+                &lt;title&gt;Document&lt;/title&gt;
+            &lt;/head&gt;
+            &lt;body&gt;
+                &lt;h1&gt;Hello, World!&lt;/h1&gt;
+            &lt;/body&gt;
+            &lt;/html&gt;
+        </code>
+    </pre>
+
+    <button onclick="copyToClipboard()">Copiar código</button>
+        
+    <script>
+        function copyToClipboard() {
+            const codeElement = document.getElementById('htmlCode');
+            const text = codeElement.textContent;
+            navigator.clipboard.writeText(text).then(function() {
+                alert('Código copiado al portapapeles');
+            }, function(err) {
+                console.error('Error al copiar el código: ', err);
+            });
+        }
+    </script>
+
+    <br>
+
+    <a href="https://eloquentjs-es.thedojo.mx/Eloquent_JavaScript.pdf" target="_blank" rel="noopener noreferrer">Libro Java Script</a>
+        
+    
+</body>
+</html>

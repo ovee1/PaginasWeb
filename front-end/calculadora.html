@@ -1,0 +1,223 @@
+<html>
+    <head>
+        <title>Calculadora de Subred</title>
+        <script>
+            /*
+             * Funcion encargada de calcular y mostrar los resultados
+             */
+            function calcularSubred() {
+                var ipMask = document.getElementById('txtInput').value;
+
+                if(validateIpMask(ipMask)) {
+
+                    // array de 4 elementos, 1 para cada octeto
+                    var ip = parseIp(ipMask);
+
+                    // array de 4 elementos, 1 para cada octeto
+                    var mask = parseMask(ipMask);
+
+                    var net = calcularNetwork(ip, mask);
+
+                    var broad = calcularBroadcast(ip, mask)
+
+                    document.getElementById('spanIpDec').innerHTML = formatNumber(ip);
+                    document.getElementById('spanIpBin').innerHTML = formatNumber(ip, 2);
+
+                    document.getElementById('spanMaskDec').innerHTML = formatNumber(mask);
+                    document.getElementById('spanMaskBin').innerHTML = formatNumber(mask, 2);
+
+                    document.getElementById('spanNetworkDec').innerHTML = formatNumber(net);
+                    document.getElementById('spanNetworkBin').innerHTML = formatNumber(net, 2);
+
+                    document.getElementById('spanBroadcastDec').innerHTML = formatNumber(broad);
+                    document.getElementById('spanBroadcastBin').innerHTML = formatNumber(broad, 2);
+
+                    document.getElementById('divError').innerHTML = '';
+                } else {
+                    document.getElementById('divError').innerHTML = 'IP/MASK Inválido';
+                }
+            }
+
+            /*
+             * Obtiene el IP de la entrada de usuario
+             */
+            function parseIp(ipMask) {
+                var str = ipMask.split('/')[0];
+                var a = str.split('.');
+
+                return [parseInt(a[0]), parseInt(a[1]), parseInt(a[2]), parseInt(a[3])];
+            }
+
+            /*
+             * Obtiene la mascara de red de la entrada de usuario
+             */
+            function parseMask(ipMask) {
+                var str = ipMask.split('/')[1];
+                var mShortFormat = parseInt(str);
+
+                var strMask = '';
+
+                var index = 1;
+                while(index <= 32) {
+                    strMask += (index <= mShortFormat) ? '1' : '0';
+                    strMask += (index % 8 == 0) ? "." : '';
+                    index++;
+                }
+
+                var a = strMask.split('.');
+
+                return [parseInt(a[0], 2), parseInt(a[1], 2), parseInt(a[2], 2), parseInt(a[3], 2)];
+            }
+
+            /*
+             * Calcula el network para el ip y la mascara de red especificado
+             *
+             * El network se obtiene al hacer un AND bit a bit entre el IP y la mascara de red
+             */
+            function calcularNetwork(ipArray, maskArray) {
+                return [(ipArray[0] & maskArray[0]),
+                            (ipArray[1] & maskArray[1]),
+                            (ipArray[2] & maskArray[2]),
+                            (ipArray[3] & maskArray[3])];
+            }
+
+            /*
+             * Calcula el broadcast para el ip y la mascara de red especificado
+             *
+             * El broadcast se obtiene al hacer un OR bit a bit entre el IP y el complemento
+             * a uno de la mascara de red
+             */
+            function calcularBroadcast(ipArray, maskArray) {
+                var maskComp1 = obtenerComplementoUno(maskArray);
+                return [(ipArray[0] | maskComp1[0]),
+                           (ipArray[1] | maskComp1[1]),
+                           (ipArray[2] | maskComp1[2]),
+                           (ipArray[3] | maskComp1[3])];
+            }
+
+            /*
+             * Invierte cada uno de los bits del ip, esto es sólo un hack
+             * para conseguirlo ya que javascript no posee una forma
+             * directa para hacerlo, diferente a otros lenguajes
+             * el operador (~) de javascript obtiene el complemento a dos
+             * en lugar del complemento a uno.
+             */
+            function obtenerComplementoUno(ipArray) {
+                var flag = 0xFF;
+                return [(ipArray[0] ^ flag), (ipArray[1] ^ flag), (ipArray[2] ^ flag), (ipArray[3] ^ flag)];
+            }
+
+            /*
+             * Retorna un numero ip en el formato N.N.N.N
+             *
+             * Dependiendo de la base que se le pase, N puede ser decimal o binario
+             */
+            function formatNumber(ipArray, base) {
+                if(base == 2) {
+                    var n1 = completar8Bits(ipArray[0].toString(2));
+                    var n2 = completar8Bits(ipArray[1].toString(2));
+                    var n3 = completar8Bits(ipArray[2].toString(2));
+                    var n4 = completar8Bits(ipArray[3].toString(2));
+
+                    return n1 + '.' + n2 + '.' + n3 + '.' + n4;
+                } else {
+                    return ipArray[0] + '.' + ipArray[1] + '.' + ipArray[2] + '.' + ipArray[3];
+                }
+            }
+
+            /*
+             * Al convertir un entero a binario no siempre mostrará con la cantidad de bits fija
+             * Como nosotros queremos que sea mostrada en grupos de 8 bits,
+             * esta funcion rellena con ceros los bits faltantes
+             */
+            function completar8Bits(ip) {
+                var newIp = ip;
+                for(var i = ip.length; i < 8; i++) {
+                    newIp = ("0" + newIp);
+                }
+                return newIp;
+            }
+
+            /**
+             * Verifica que el ip y la mascara de red ingresados por el usuario
+             * cumpla con el formato IP/MASK y que sea un IP válido.
+             */
+            function validateIpMask(ipmask) {
+                var re = new RegExp("\\b[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}/[0-9]{1,2}\\b");
+                if(ipmask.match(re)) {
+                    var ip = parseIp(ipmask);
+                    var maskDec = parseInt(ipmask.split('/')[1]);
+                    return (ip[0] < 256) && (ip[1] < 256) && (ip[2] < 256) &&
+                              (ip[3] < 256) && (maskDec < 32);
+                }
+                return false;
+            }
+
+            function typing(event) {
+                var keyCode = ('which' in event) ? event.which : event.keyCode;
+                if(keyCode == 13) {
+                    calcularSubred();
+                } else {
+                    var defaultValue = '&nbsp;&nbsp;&nbsp;.&nbsp;&nbsp;&nbsp;.&nbsp;&nbsp;&nbsp;.&nbsp;&nbsp;&nbsp;';
+                    document.getElementById('spanIpDec').innerHTML = defaultValue;
+                    document.getElementById('spanIpBin').innerHTML = defaultValue;
+
+                    document.getElementById('spanMaskDec').innerHTML = defaultValue;
+                    document.getElementById('spanMaskBin').innerHTML = defaultValue;
+
+                    document.getElementById('spanNetworkDec').innerHTML = defaultValue;
+                    document.getElementById('spanNetworkBin').innerHTML = defaultValue;
+
+                    document.getElementById('spanBroadcastDec').innerHTML = defaultValue;
+                    document.getElementById('spanBroadcastBin').innerHTML = defaultValue;
+
+                    document.getElementById('divError').innerHTML = '';
+                }
+            }
+        </script>
+        <style>
+            .label {
+                text-align: right; font-size: 20pt;
+                font-weight: bold; color: #666;
+            }
+            .entrada { font-size: 20px; font-weight: bold; }
+            .sample { color: #777; font-size: small; font-style: italic;}
+            table { font-size: 20pt; color: #777; margin: 20px; }
+            .error { color: red; margin: 10px; padding: 10px; }
+        </style>
+    </head>
+    <body>
+        <center>
+            <h2>Calculadora de Subred</h2>
+            <label for="txtInput">IP/MASK</label>
+            <input id='txtInput' type="text" class="entrada" onkeyup="typing(event)" />
+            <input type="button" value="Calcular" onclick="calcularSubred()" />
+            <div class="sample">
+                Ej: 192.168.1.8/24&nbsp;&nbsp;&nbsp;&nbsp;10.10.10.45/26
+            </div>
+            <div id="divError" class="error"></div>
+            <table cellpadding="8" cellspacing="0">
+                <tr>
+                    <td class="label">IP:</td>
+                    <td><span id="spanIpDec"></span></td>
+                    <td><span id="spanIpBin"></span></td>
+                </tr>
+                <tr>
+                    <td class="label">Mask:</td>
+                    <td><span id="spanMaskDec"></span></td>
+                    <td><span id="spanMaskBin"></span></td>
+                </tr>
+                <tr>
+                    <td class="label">Network:</td>
+                    <td><span id="spanNetworkDec"></span></td>
+                    <td><span id="spanNetworkBin"></span></td>
+                </tr>
+                <tr>
+                    <td class="label">Broadcast:</td>
+                    <td><span id="spanBroadcastDec"></span></td>
+                    <td><span id="spanBroadcastBin"></span></td>
+                </tr>
+            </table>
+        </center>
+    </body>
+</html>
