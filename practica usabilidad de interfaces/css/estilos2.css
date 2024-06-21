@@ -1,0 +1,158 @@
+* {   
+    margin: 0px;   
+    padding: 0px; 
+}* body {
+    margin: 0px;   
+    padding: 0px; 
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #eaeaea;
+}
+
+#agrupar {
+    width: 80%;
+    margin: 1 auto;
+    background: #a2fff4;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(225, 131, 23, 0.1);
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+header#cabecera {
+    width: 100%;
+    background: #2e2b2b;
+    color:#ffffff;
+    padding: 20px;
+    text-align: center;
+    
+}
+
+header#cabecera h1 {
+    margin: 0;
+}
+
+header#cabecera nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+}
+
+header#cabecera nav ul li {
+    display:inline;
+    margin-right: 10px;
+}
+
+header#cabecera nav ul a {
+    color: #ffffffe4;
+    text-decoration: none;
+}
+
+header#cabecera form {
+    display: inline-block;
+    margin-top: 10px;
+}
+
+header#cabecera form input[type="text"] {
+    padding: 5px;
+    width: 5px;
+    width: 200px;
+}
+
+header#cabecera form input[type="sumbit"] {
+    padding: 5px;
+}
+
+#contenido {
+    flex: 3;
+    margin-right: 20px;
+}
+
+section {
+    margin-bottom: 20px;
+}
+
+section h2 {
+    color: #333;
+    border-bottom: 2px solid #333;
+    padding-bottom: 5px;
+}
+
+article{
+    background: #FFFBCC;
+    border: 1px solid #777373;
+    padding: 20px;
+    margin-bottom: 15px; 
+ }
+
+article h3 {
+    color: #666;
+}
+
+.description img {
+    max-width: 100%;
+    height: auto;
+}
+
+.ingredientes, .elaboracion {
+    margin-top: 10px;
+}
+
+.ingredientes h4, .elaboracion h4 {
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.ingredientes ul, .elaboracion ol {
+    margin-left: 20px;
+}
+
+.elaboracion p, .elaboracion ol {
+    margin-top: 5px;
+    margin-left: 20px;
+}
+
+/* Publicidad */
+aside#lateral {
+    flex: 1;
+    background: #f4f4f4;
+    padding: 10px;
+}
+
+aside#lateral p {
+    font-weight: bold;
+}
+
+aside#lateral article {
+    margin-bottom: 10px;
+}
+
+aside#lateral article img {
+    max-width: 100%;
+    height: auto;
+}
+
+aside#lateral figure {
+    margin: 0;
+    text-align: center;
+}
+
+aside#lateral figcaption {
+    font-size: 0.9em;
+    color: #666;
+}
+
+/* Pie de página */
+footer#pie {
+    width: 100%;
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 20px;
+}
+
+footer#pie p {
+    margin: 5px 0;
+}

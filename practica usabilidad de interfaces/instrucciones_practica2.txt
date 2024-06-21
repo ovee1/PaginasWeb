@@ -1,0 +1,10 @@
+Aplicar estilos CSS al documento practica2.html
+de tal forma que tome la distribución mostrada en 
+el archivo wireframe2.png
+
+Aplique estilos a cada uno de los elementos HTML
+para lograr una página estilizada y agradable.
+
+No olvide incluir sus datos personales en el pie de página 
+documento HTML
+
